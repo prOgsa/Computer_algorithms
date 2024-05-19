@@ -57,23 +57,6 @@ def print_table(data):
             j += 1
         print(table)
 def print_answer(data, x, y, z, nx, ny, nz):
-    # global choose
-    # if choose == 1:
-    #     print(f"Результат интерполяции полиномом Нютона в заданной точке:", find_4d_newton(data, x, y, z, nx, ny, nz))
-    # elif choose == 2:
-    #     print(f"Результат интерполяции сплайнам в заданной точке:", find_4d_spline(data, x, y, z, 0, 0))
-    # elif choose == 3:
-    #     print(f"Результат смешанной интерполяции по x в заданной точке:", find_mixed_x_4d(data, x, y, z, nx, 0, 0))
-    # elif choose == 4:
-    #     print(f"Результат смешанной интерполяции по y в заданной точке:", find_mixed_y_4d(data, x, y, z, ny, 0, 0))
-    # elif choose == 5:
-    #     print(f"Результат смешанной интерполяции по z в заданной точке:", find_mixed_z_4d(data, x, y, z, nz, 0, 0))
-    # elif choose == 6:
-    #     print(f"Результат смешанной интерполяции по xy в заданной точке:", find_mixed_xy_4d(data, x, y, z, nx, ny, 0, 0))
-    # elif choose == 7:
-    #     print(f"Результат смешанной интерполяции по xz в заданной точке:", find_mixed_xz_4d(data, x, y, z, nx, nz, 0, 0))
-    # elif choose == 8:
-    #     print(f"Результат смешанной интерполяции по yz в заданной точке:", find_mixed_yz_4d(data, x, y, z, ny, nz, 0, 0))
     print(f"Результат интерполяции полиномом Нютона в заданной точке:", find_4d_newton(data, x, y, z, nx, ny, nz))
     print(f"Результат интерполяции сплайнам в заданной точке:", find_4d_spline(data, x, y, z, 0, 0))
     print(f"Результат смешанной интерполяции по x в заданной точке:", find_mixed_x_4d(data, x, y, z, nx, 0, 0))
@@ -82,7 +65,7 @@ def print_answer(data, x, y, z, nx, ny, nz):
     print(f"Результат смешанной интерполяции по xy в заданной точке:", find_mixed_xy_4d(data, x, y, z, nx, ny, 0, 0))
     print(f"Результат смешанной интерполяции по xz в заданной точке:", find_mixed_xz_4d(data, x, y, z, nx, nz, 0, 0))
     print(f"Результат смешанной интерполяции по yz в заданной точке:", find_mixed_yz_4d(data, x, y, z, ny, nz, 0, 0))
-# print_answer(data, x, y, z, nx, ny, nz)
+print_answer(data, x, y, z, nx, ny, nz)
 
 data_z1 = np.array(data[round(z)][1])
 
@@ -100,10 +83,10 @@ dx = (Xmax - Xmin) / steps
 x_arr = [Xmin + dx * i for i in range(steps + 1)]
 y_arr = [Ymin + dy * i for i in range(steps + 1)]
 
-# newtonfarr = ([[find_4d_newton(data, x, y, z, nx, ny, nz) for y in y_arr] for x in x_arr])
+newtonfarr = ([[find_4d_newton(data, x, y, z, nx, ny, nz) for y in y_arr] for x in x_arr])
 # splinefarr = ([[find_4d_spline(data, x, y, z, 0, 0) for y in y_arr] for x in x_arr])
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
 
 
 x_1 = [0, 1, 2, 3, 4]
@@ -115,7 +98,7 @@ x_arr = np.array(x_arr)
 y_arr = np.array(y_arr)
 x_arr, y_arr = np.meshgrid(x_arr, y_arr)
 
-# newtonfarr = np.array(newtonfarr)
+newtonfarr = np.array(newtonfarr)
 # splinefarr = np.array(splinefarr)
 
 # x_2, y_2 = np.meshgrid(x_arr, y_arr)
@@ -155,7 +138,7 @@ print("f(x, y, z):", f(X, Y, Z))
 
 # x, y, z = np.meshgrid(x, y, z)
 # colors = plt.cm.viridis(u)
-# surf = ax.plot_surface(x_1, y_1, data_z1, cmap='plasma', rstride=1, cstride=1, label=f'z={z}', antialiased=True)
+surf = ax.plot_surface(x_1, y_1, data_z1, cmap='plasma', rstride=1, cstride=1, label=f'z={z}', antialiased=True)
 # surf = ax.plot_surface(x_arr, y_arr, newtonfarr, cmap='plasma', rstride=1, cstride=1)
 # fig = go.Figure(
 #     go.Surface(x=x, y=y, z=u)
@@ -167,5 +150,5 @@ print("f(x, y, z):", f(X, Y, Z))
 # ax.set_ylabel('Y')
 # ax.set_zlabel('Z')
 
-# fig.colorbar(surf)
-# plt.show()
+fig.colorbar(surf)
+plt.show()

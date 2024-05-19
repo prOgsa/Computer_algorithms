@@ -43,5 +43,3 @@ def read_data1(name_file):
                         data[j - 1].append(numbers[1:])
             i += 1
     return data
-
-# print(data)
